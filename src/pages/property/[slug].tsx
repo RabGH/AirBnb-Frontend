@@ -1,5 +1,6 @@
 import { sanityClient } from "../../../sanity";
 import { isMultiple } from "../../../utils";
+import Image from '../../components/Image'
 
 interface Review {
   _key: string;
@@ -61,6 +62,15 @@ const Property = ({
   return ( // we have hardcoded this next part when it would be better to be put into sanity instead 
     <div className="container" >
       <h1><b>{title}</b></h1>
+      <p>{reviewAmount} review{isMultiple(reviewAmount)}</p>
+      <div className="images-section">
+        <Image identifier="main-image" image={mainImage} />
+        <div className="sub-images-section">
+        {images.map((image, index) => <Image key={index} identifier="sub-image" image={image} />)}
+        </div>
+      </div>
+
+
       <h2><b>{propertyType} hosted by {host?.name}</b></h2>
       <h4>{bedrooms} bedroom{isMultiple(bedrooms)} * {beds} bed{isMultiple(beds)}</h4>
       <hr />
