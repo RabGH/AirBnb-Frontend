@@ -1,4 +1,5 @@
 import { sanityClient } from "../../../sanity";
+import { isMultiple } from "../../../utils";
 
 interface Review {
   _key: string;
@@ -41,24 +42,41 @@ interface PropertyProps {
 }
 
 const Property = ({
-   title,
-   location,
-   propertyType,
-   mainImage,
-   images,
-   pricePerNight,
-   beds,
-   bedrooms,
-   description,
-   host,
-   reviews,
-   }: PropertyProps) => {
+    title,
+    location,
+    propertyType,
+    mainImage,
+    images,
+    pricePerNight,
+    beds,
+    bedrooms,
+    description,
+    host,
+    reviews,
+  }: PropertyProps) => {
 
-  return (
+  const reviewAmount = reviews ? reviews.length : 0;
+
+
+  return ( // we have hardcoded this next part when it would be better to be put into sanity instead 
     <div className="container" >
-      <h1><b>{ title }</b></h1>
+      <h1><b>{title}</b></h1>
       <h2><b>{propertyType} hosted by {host?.name}</b></h2>
-      <h4>{bedrooms} bedroom * {beds} bed</h4>
+      <h4>{bedrooms} bedroom{isMultiple(bedrooms)} * {beds} bed{isMultiple(beds)}</h4>
+      <hr />
+      <h4><b>Enhanced Clean</b></h4>
+      <p>This host is commited to Airbnb&apos;s 5-step enhanced cleaning process.</p>
+      <h4><b>Amenities for everyday living</b></h4>
+      <p>The host has equipped this place for long stays - kitchen, shampoo, conditioner, hairdryer included</p>
+      <h4><b>House rules</b></h4>
+      <p>This place isn&apos;t suitable for pets and the host does not allow parties or smoking.</p>
+    
+      <div className="price-box">
+        <h2>${pricePerNight}</h2>
+        <h4>{reviewAmount} review{isMultiple(reviewAmount)}</h4>
+        <div className="button" onClick={() =>{}}>Change Dates</div>
+      </div>
+
     </div>
   )
 }
