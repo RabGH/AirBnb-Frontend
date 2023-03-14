@@ -1,15 +1,7 @@
 import { sanityClient } from '../../sanity'
 
-interface Property {
-  title: string;
-  description: string;
-}
 
-interface SanityHome {
-  properties: Property[];
-}
-
-const Home = ({ properties }: SanityHome) => {
+const Home = () => {
   return (
     <>
       
