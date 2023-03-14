@@ -28,15 +28,8 @@ const config: SanityConfig = {
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
  * Read more: https://www.sanity.io/docs/image-url
  **/
-export const urlFor = (source: any): ReturnType<typeof imageUrlBuilder> => {
-  const imageUrl = imageUrlBuilder(config).image(source)
-    .width(800)
-    .height(600)
-    .crop("center")
-    .format("jpg")
-    .url();
-  return imageUrl;
-};
+export const urlFor = (source: any): ReturnType<typeof imageUrlBuilder> => 
+  imageUrlBuilder(config).image(source);
 
 // Set up the client for fetching data in the getProps page functions
 export const sanityClient = createClient(config);
