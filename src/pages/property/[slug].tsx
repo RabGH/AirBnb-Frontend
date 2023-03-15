@@ -1,6 +1,6 @@
 import { sanityClient } from "../../../sanity";
 import { isMultiple } from "../../../utils";
-import Image from '../../components/Image'
+import ImageSlug from '../../components/Image_slug'
 
 interface Review {
   _key: string;
@@ -64,9 +64,9 @@ const Property = ({
       <h1><b>{title}</b></h1>
       <p>{reviewAmount} review{isMultiple(reviewAmount)}</p>
       <div className="images-section">
-        <Image identifier="main-image" image={mainImage} />
+        <ImageSlug identifier="main-image" image={mainImage} />
         <div className="sub-images-section">
-        {images.map((image, index) => <Image key={index} identifier="sub-image" image={image} />)}
+        {images.map((image, index) => <ImageSlug key={index} identifier="sub-image" image={image} />)}
         </div>
       </div>
 
@@ -122,7 +122,6 @@ export const getServerSideProps = async (pageContext: PageContext) => {
   }`
 
   const property = await sanityClient.fetch(query, {pageSlug})
-
   if (!property) {
     return {
       props: null,
@@ -134,7 +133,7 @@ export const getServerSideProps = async (pageContext: PageContext) => {
         title: property.title,
         location: property.location,
         propertyType: property.propertyType,
-        mainImage: property.mainImage,
+        mainImage: property.mainImage || null,
         images: property.images,
         pricePerNight: property.pricePerNight,
         beds: property.beds,
