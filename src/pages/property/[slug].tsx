@@ -93,7 +93,6 @@ const Property = ({
 
 export const getServerSideProps = async (pageContext: PageContext) => {
   const pageSlug = pageContext.query.slug
-  console.log(pageSlug)
   
   const query = `*[ _type == "property" && slug.current == $pageSlug][0]{
     title,
@@ -121,7 +120,6 @@ export const getServerSideProps = async (pageContext: PageContext) => {
       }
     }
   }`
-  console.log(query)
 
   const property = await sanityClient.fetch(query, {pageSlug})
 
