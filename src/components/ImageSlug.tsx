@@ -16,7 +16,7 @@ const ImageSlug = ({ identifier, image }: ImageSlugProps) => {
 
   return (
     <div className={identifier === "main-image" ? "main-image" : "image"}>
-      <Image src={imageUrl} alt="" width={300} height={450} />
+      <Image src={imageUrl} alt="" width={800} height={600} />
     </div>
   )
 }

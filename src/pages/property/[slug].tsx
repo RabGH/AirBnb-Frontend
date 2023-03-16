@@ -1,6 +1,7 @@
 import { sanityClient } from "../../../sanity";
 import { isMultiple } from "../../../utils";
-import ImageSlug from '../../components/Image_slug'
+import ImageSlug from '../../components/ImageSlug'
+import ReviewSlug from '../../components/ReviewSlug'
 
 interface Review {
   _key: string;
@@ -8,9 +9,12 @@ interface Review {
   rating: number;
   reviewDescription: string;
   traveller: {
-    _key: string;
-    _type: string;
+    _id: string;
     name: string;
+    slug: {
+      current: string;
+    };
+    image: string;
   };
 }
 
@@ -39,7 +43,7 @@ interface PropertyProps {
      name?: string;
   };
 
-  reviews?: Array<Review>
+  reviews?: Review[] | undefined;
 }
 
 const Property = ({
@@ -61,31 +65,39 @@ const Property = ({
 
   return ( // we have hardcoded this next part when it would be better to be put into sanity instead 
     <div className="container" >
-      <h1><b>{title}</b></h1>
-      <p>{reviewAmount} review{isMultiple(reviewAmount)}</p>
-      <div className="images-section">
-        <ImageSlug identifier="main-image" image={mainImage} />
-        <div className="sub-images-section">
-        {images.map((image, index) => <ImageSlug key={index} identifier="sub-image" image={image} />)}
+        <h1><b>{title}</b></h1>
+        <p>{reviewAmount} review{isMultiple(reviewAmount)}</p>
+        <div className="image-section">
+          <ImageSlug identifier="main-image" image={mainImage} />
+          <div className="sub-image-section">
+          {images.map((image, index) => <ImageSlug key={index} identifier="sub-image" image={image} />)}
+          </div>
         </div>
+
+      <div className="section">
+          <div className="information">
+            <h2><b>{propertyType} hosted by {host?.name}</b></h2>
+            <h4>{bedrooms} bedroom{isMultiple(bedrooms)} * {beds} bed{isMultiple(beds)}</h4>
+            <hr />
+            <h4><b>Enhanced Clean</b></h4>
+            <p>This host is commited to Airbnb&apos;s 5-step enhanced cleaning process.</p>
+            <h4><b>Amenities for everyday living</b></h4>
+            <p>The host has equipped this place for long stays - kitchen, shampoo, conditioner, hairdryer included</p>
+            <h4><b>House rules</b></h4>
+            <p>This place isn&apos;t suitable for pets and the host does not allow parties or smoking.</p>
+          </div>
+          <div className="price-box">
+              <h2>${pricePerNight}</h2>
+              <h4>{reviewAmount} review{isMultiple(reviewAmount)}</h4>
+              <div className="button" onClick={() =>{}}>Change Dates</div>
+          </div>
       </div>
 
-
-      <h2><b>{propertyType} hosted by {host?.name}</b></h2>
-      <h4>{bedrooms} bedroom{isMultiple(bedrooms)} * {beds} bed{isMultiple(beds)}</h4>
       <hr />
-      <h4><b>Enhanced Clean</b></h4>
-      <p>This host is commited to Airbnb&apos;s 5-step enhanced cleaning process.</p>
-      <h4><b>Amenities for everyday living</b></h4>
-      <p>The host has equipped this place for long stays - kitchen, shampoo, conditioner, hairdryer included</p>
-      <h4><b>House rules</b></h4>
-      <p>This place isn&apos;t suitable for pets and the host does not allow parties or smoking.</p>
-    
-      <div className="price-box">
-        <h2>${pricePerNight}</h2>
-        <h4>{reviewAmount} review{isMultiple(reviewAmount)}</h4>
-        <div className="button" onClick={() =>{}}>Change Dates</div>
-      </div>
+
+      <h2>{reviewAmount} review {isMultiple(reviewAmount)} </h2>
+      {reviewAmount > 0 &&
+       reviews && reviews.map((review) => <ReviewSlug key={review._key} review={review} />)}
 
     </div>
   )
