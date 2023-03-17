@@ -132,3 +132,7 @@ body {
 .line {
   border: 1px solid grey;
 }
+
+.home-link {
+  text-decoration: none;
+}

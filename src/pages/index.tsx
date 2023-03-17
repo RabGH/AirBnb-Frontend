@@ -1,9 +1,32 @@
 import { sanityClient, urlFor } from '../../sanity'
+import { isMultiple } from '../../utils';
 import Image from 'next/image'
+import Link from 'next/link'
+
+interface Review {
+  _key: string;
+  _type: string;
+  rating: number;
+  reviewDescription: string;
+  traveller: {
+    _id: string;
+    name: string;
+    slug: {
+      current: string;
+    };
+    image: string;
+  };
+}
 
 interface Property {
+  title: string;
+  pricePerNight: number;
   _id: string;
   mainImage?: string;
+  slug: {
+    current: string;
+  }
+  reviews: Review[];
 }
 
 interface HomeProps {
@@ -21,11 +44,17 @@ const Home = ({ properties }: HomeProps) => {
             <h1>Places to stay near you</h1>
             <div className='feed'>
               {properties.map((property, index) => (
-                  <div key={property._id} className='card'>
-                    {property.mainImage && (
-                      <Image src={urlFor(property.mainImage).auto('format').url()} alt="" width={800} height={600} />
-                    )}
-                  </div>
+                  <Link className='home-link' href={`property/${property.slug.current}`} key={property._id} >
+                    <div key={property._id} className='card'>
+                      {property.mainImage && (
+                        <Image src={urlFor(property.mainImage).auto('format').url()} alt="" width={800} height={600} />
+                      )}
+                      <p>{property.reviews.length} review{isMultiple(property.reviews.length)}</p>
+                      <h3>{property.title}</h3>
+                      <h4>${property.pricePerNight} /per Night</h4>
+                      <hr />
+                    </div>
+                  </Link>
               ))}
             </div>
           </div>
