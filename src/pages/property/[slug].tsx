@@ -3,6 +3,11 @@ import { isMultiple } from "../../../utils";
 import ImageSlug from '../../components/ImageSlug'
 import ReviewSlug from '../../components/ReviewSlug'
 
+import dynamic from 'next/dynamic';
+const MapSlug = dynamic(() => import('../../components/MapSlug'), {
+  ssr: false,
+});
+
 interface Review {
   _key: string;
   _type: string;
@@ -32,9 +37,9 @@ interface PropertyProps {
   pricePerNight: number;
   beds: number;
   bedrooms: number;
-  description: number;
+  description: string;
 
-  location?: {
+  location: {
     lat?: number;
     lng?: number;
   };
@@ -95,9 +100,19 @@ const Property = ({
 
       <hr />
 
+      <h4>{description}</h4>
+
+      <hr />
+
       <h2>{reviewAmount} review {isMultiple(reviewAmount)} </h2>
       {reviewAmount > 0 &&
        reviews && reviews.map((review) => <ReviewSlug key={review._key} review={review} />)}
+
+       <hr />
+
+       <h2>Location</h2>
+       <MapSlug lat={location?.lat || 0} lng={location?.lng || 0} />
+
 
     </div>
   )
