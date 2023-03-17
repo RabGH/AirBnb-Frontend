@@ -1,5 +1,7 @@
 import { sanityClient } from "../../../sanity";
 import { isMultiple } from "../../../utils";
+import Link from 'next/link'
+
 import ImageSlug from '../../components/ImageSlug'
 import ReviewSlug from '../../components/ReviewSlug'
 
@@ -94,7 +96,9 @@ const Property = ({
           <div className="price-box">
               <h2>${pricePerNight}</h2>
               <h4>{reviewAmount} review{isMultiple(reviewAmount)}</h4>
-              <div className="button" onClick={() =>{}}>Change Dates</div>
+              <Link href='/' className='button-link'>
+                <div className="button">Change Dates</div>
+              </Link>
           </div>
       </div>
 
@@ -111,7 +115,7 @@ const Property = ({
        <hr />
 
        <h2>Location</h2>
-       <MapSlug lat={location?.lat || 0} lng={location?.lng || 0} />
+       <MapSlug title={title} lat={location?.lat || 0} lng={location?.lng || 0} />
 
 
     </div>

@@ -55,7 +55,14 @@ body {
   border-radius: 10px;
   color: rgb(255,255,255);
   text-align: center;
+  text-decoration: none;
   background: linear-gradient(135deg, rgb(255,56,92) 20%, rgb(189,30,89));
+}
+
+.button-link {
+  color: -webkit-link;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .images-section {
@@ -101,8 +108,9 @@ body {
 }
 
 .card img {
-  max-width: 250px;
+  max-width: 350px;
   border-radius: 20px;
+  max-height: 350px;
 }
 
 .image {
