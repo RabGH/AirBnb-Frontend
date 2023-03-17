@@ -10,7 +10,6 @@ interface MapSlugProps {
 
 const MapSlug: React.FC<MapSlugProps> = ({ lat, lng, title }) => {
   const position: LatLngTuple = [lat, lng];
-  console.log(position);
   
   return (
     <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ height: '400px', width: '100%' }}>
