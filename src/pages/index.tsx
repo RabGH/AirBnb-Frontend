@@ -65,14 +65,10 @@ const Home = ({ properties }: HomeProps) => {
                     <h4>${property.pricePerNight} /per Night</h4>
                     <hr />
                   </Link>
-                  <DashBoardMap
-                    lat={property.location.lat}
-                    lng={property.location.lng}
-                    properties={[property]}
-                  />              
                 </div>
               ))}
-            </div>
+              </div>
+            {properties.length > 0 && <DashBoardMap properties={properties} className='dashboard-map' />}
           </div>
         </div>
       )}

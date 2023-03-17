@@ -136,3 +136,9 @@ body {
 .home-link {
   text-decoration: none;
 }
+
+.dashboard-map .leaflet-container {
+  height: 400px;
+  width: 100%;
+}
+
