@@ -1,11 +1,15 @@
+import Link from 'next/link'
+
 const NavBar = () => {
     return (
         <div className='nav'>
-            <div className='logo'>
-            
-            </div>
+            <Link href='/'>
+                <div className='logo'>
+                
+                </div>
+            </Link>
         </div>
     )
 };
 
-export default NavBar;
+export default NavBar; 
