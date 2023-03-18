@@ -72,8 +72,10 @@ const Property = ({
 
   return ( // we have hardcoded this next part when it would be better to be put into sanity instead 
     <div className="container" >
-        <h1><b>{title}</b></h1>
-        <p>{reviewAmount} review{isMultiple(reviewAmount)}</p>
+        <div className="header">
+          <h1 className='review-title'><b>{title}</b></h1>
+          <p className='review-amount'>{reviewAmount} review{isMultiple(reviewAmount)}</p>
+        </div>
         <div className="image-section">
           <ImageSlug identifier="main-image" image={mainImage} />
           <div className="sub-image-section">
@@ -83,16 +85,18 @@ const Property = ({
 
       <div className="section">
           <div className="information">
-            <h2><b>{propertyType} hosted by {host?.name}</b></h2>
-            <h4>{bedrooms} bedroom{isMultiple(bedrooms)} * {beds} bed{isMultiple(beds)}</h4>
+            <h2 className="type-title"><b>{propertyType} hosted by {host?.name}</b></h2>
+            <h4 className='bedroom-count'>{bedrooms} bedroom{isMultiple(bedrooms)} * {beds} bed{isMultiple(beds)}</h4>
             <hr />
-            <h4><b>Enhanced Clean</b></h4>
-            <p>This host is commited to Airbnb&apos;s 5-step enhanced cleaning process.</p>
-            <h4><b>Amenities for everyday living</b></h4>
-            <p>The host has equipped this place for long stays - kitchen, shampoo, conditioner, hairdryer included</p>
-            <h4><b>House rules</b></h4>
-            <p>This place isn&apos;t suitable for pets and the host does not allow parties or smoking.</p>
-          </div>
+          <div className="body-static">
+              <h4><b>Enhanced Clean</b></h4>
+              <p>This host is commited to Airbnb&apos;s 5-step enhanced cleaning process.</p>
+              <h4><b>Amenities for everyday living</b></h4>
+              <p>The host has equipped this place for long stays - kitchen, shampoo, conditioner, hairdryer included</p>
+              <h4><b>House rules</b></h4>
+              <p>This place isn&apos;t suitable for pets and the host does not allow parties or smoking.</p>
+          </div>          
+        </div>
           <div className="price-box">
               <h2>${pricePerNight}</h2>
               <h4>{reviewAmount} review{isMultiple(reviewAmount)}</h4>
@@ -104,19 +108,24 @@ const Property = ({
 
       <hr />
 
-      <h4>{description}</h4>
+      <h4 className='description'>{description}</h4>
 
       <hr />
 
-      <h2>{reviewAmount} review {isMultiple(reviewAmount)} </h2>
-      {reviewAmount > 0 &&
-       reviews && reviews.map((review) => <ReviewSlug key={review._key} review={review} />)}
+      <div className="reviews">
+        <h2 className="review-amount">{reviewAmount} review {isMultiple(reviewAmount)} </h2>
+        {reviewAmount > 0 &&
+         reviews && reviews.map((review) => 
+         <ReviewSlug key={review._key} review={review} />
+         )}
+      </div>
 
        <hr />
 
-       <h2>Location</h2>
-       <MapSlug title={title} lat={location?.lat || 0} lng={location?.lng || 0} />
-
+      <div className='map-card'>
+         <h2>Location</h2>
+         <MapSlug title={title} lat={location?.lat || 0} lng={location?.lng || 0} />
+      </div>
 
     </div>
   )

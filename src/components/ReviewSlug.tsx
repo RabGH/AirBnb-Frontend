@@ -26,6 +26,7 @@ const ReviewSlug = ({ review }: Props) => {
       <h1>{rating}</h1>
       <h2>{name}</h2>
       <Image
+        className="review-image"
         src={urlFor(image).width(50).height(50).crop("focalpoint").auto("format").url()}
         width={50}
         height={50}

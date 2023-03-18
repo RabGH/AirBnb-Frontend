@@ -68,7 +68,9 @@ const Home = ({ properties }: HomeProps) => {
                 </div>
               ))}
               </div>
-            {properties.length > 0 && <DashBoardMap properties={properties} className='dashboard-map' />}
+            <div className='map'>
+              {properties.length > 0 && <DashBoardMap properties={properties} className='dashboard-map' />}
+            </div>
           </div>
         </div>
       )}
