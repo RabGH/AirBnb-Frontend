@@ -101,7 +101,7 @@ const Property = ({
               <h2>${pricePerNight}</h2>
               <h4>{reviewAmount} review{isMultiple(reviewAmount)}</h4>
               <Link href='/' className='button-link'>
-                <div className="button">Change Dates</div>
+                <div className="button">Home</div>
               </Link>
           </div>
       </div>
